@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{84341FFA-AAC7-48C4-839F-7F3911416DF0}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{22B28D9E-A89F-4AD8-8A7F-B84FA7175122}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MSClientLess</RootNamespace>
-    <AssemblyName>MSClientLess</AssemblyName>
+    <RootNamespace>MSCore</RootNamespace>
+    <AssemblyName>MSCore</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,18 +41,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Client\MapleClient.cs" />
+    <Compile Include="MapleStory.cs" />
+    <Compile Include="Net\Handler\MapleClientHandler.cs" />
+    <Compile Include="Net\Handler\PacketAttributes.cs" />
+    <Compile Include="Net\Handler\PacketOpcode.cs" />
+    <Compile Include="MapleLib\AbstractPacket.cs" />
+    <Compile Include="MapleLib\CryptoConstants.cs" />
+    <Compile Include="MapleLib\HexEncoding.cs" />
+    <Compile Include="MapleLib\MapleCrypto.cs" />
+    <Compile Include="MapleLib\PacketLib\Acceptor.cs" />
+    <Compile Include="MapleLib\PacketLib\Connector.cs" />
+    <Compile Include="MapleLib\PacketLib\Session.cs" />
+    <Compile Include="MapleLib\PacketLib\SessionType.cs" />
+    <Compile Include="MapleLib\PacketReader.cs" />
+    <Compile Include="MapleLib\PacketWriter.cs" />
+    <Compile Include="Net\ClientSession.cs" />
+    <Compile Include="Net\Handler\SendablePacket\AbstractSendablePacket.cs" />
+    <Compile Include="Net\Handler\SendablePacket\ISendablePacket.cs" />
+    <Compile Include="Net\Handler\SendablePacket\LoginPassword.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\Logger.cs" />
+    <Compile Include="Tools\MapleKeys.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MSCore\MSCore.csproj">
-      <Project>{22B28D9E-A89F-4AD8-8A7F-B84FA7175122}</Project>
-      <Name>MSCore</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
