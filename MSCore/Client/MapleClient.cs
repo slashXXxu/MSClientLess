@@ -9,32 +9,40 @@ using System.Threading.Tasks;
 
 namespace MSCore.Client
 {
-    class MapleClient
+    public class MapleClient
     {
         public String Account {  get; set; }
 
-        public String Passowrd { private get; set; }
+        public String Passowrd { get; set; }
 
-        private ClientSession session = null;
+        public Byte[] MacAddress;
+
+        private ClientSession Session = null;
 
         public MapleClient()
         {
-            session = new ClientSession();
+            Session = new ClientSession();
+        }
+
+        private void InitMacAddress()
+        {
+            MacAddress = new Byte[6];
+            new Random((int)DateTime.Now.Ticks).NextBytes(MacAddress);
         }
 
         public void Connect(String ip, int port)
         {
-            session.Connect(ip, port);
+            Session.Connect(ip, port);
         }
 
         public void Disconnect()
         {
-            session.Disconnect();
+            Session.Disconnect();
         }
 
-        public void Send(ISendablePacket packet)
+        public void Send(IPacket packet)
         {
-            session.Send(packet.toArray());
+            Session.Send(packet.toArray());
         }
 
         public void Login()

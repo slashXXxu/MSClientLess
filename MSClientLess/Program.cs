@@ -1,4 +1,5 @@
 ﻿using MSCore;
+using MSCore.Net.Handler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,9 @@ namespace MSClientLess
         {
             MapleStory ms = new MapleStory();
 
-            ms.ConnectToLoginServer("192.168.156.1", 8484);
+            ms.ConnectToLoginServer("172.96.161.162", 8484);
+
+            MapleClientHandler.Instance.ToString();
 
             Console.Read();
         }

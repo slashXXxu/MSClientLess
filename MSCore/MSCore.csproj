@@ -43,8 +43,8 @@
   <ItemGroup>
     <Compile Include="Client\MapleClient.cs" />
     <Compile Include="MapleStory.cs" />
+    <Compile Include="Net\Handler\AbstractPacket.cs" />
     <Compile Include="Net\Handler\MapleClientHandler.cs" />
-    <Compile Include="Net\Handler\PacketAttributes.cs" />
     <Compile Include="Net\Handler\PacketOpcode.cs" />
     <Compile Include="MapleLib\AbstractPacket.cs" />
     <Compile Include="MapleLib\CryptoConstants.cs" />
@@ -57,8 +57,9 @@
     <Compile Include="MapleLib\PacketReader.cs" />
     <Compile Include="MapleLib\PacketWriter.cs" />
     <Compile Include="Net\ClientSession.cs" />
+    <Compile Include="Net\Handler\ReceiceablePacket\AbstractReceiveablePacket.cs" />
     <Compile Include="Net\Handler\SendablePacket\AbstractSendablePacket.cs" />
-    <Compile Include="Net\Handler\SendablePacket\ISendablePacket.cs" />
+    <Compile Include="Net\Handler\IPacket.cs" />
     <Compile Include="Net\Handler\SendablePacket\LoginPassword.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\Logger.cs" />
