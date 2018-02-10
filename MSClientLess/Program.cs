@@ -14,10 +14,8 @@ namespace MSClientLess
         {
             MapleStory ms = new MapleStory();
 
-            ms.ConnectToLoginServer("172.96.161.162", 8484);
-
-            MapleClientHandler.Instance.ToString();
-
+            ms.ConnectToLoginServer("127.0.0.1", 8484);
+            ms.Login("admin", "admin");
             Console.Read();
         }
     }

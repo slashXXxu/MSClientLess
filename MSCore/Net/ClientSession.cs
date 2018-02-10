@@ -1,4 +1,6 @@
 ﻿using MapleLib.PacketLib;
+using MSCore.Client;
+using MSCore.Net.Handler;
 using MSCore.Tools;
 using System;
 using System.Collections.Generic;
@@ -17,9 +19,20 @@ namespace MSCore.Net
 
         private Session session = null;
 
-        private bool gotEnc = false;
+        public bool Connected { get { return session != null ? session.Connected : false; } }
 
-        public bool Connected = false;
+        public bool isInit { get; private set; }
+
+        private MapleClientHandler PacketHandler;
+
+        private MapleClient Client;
+
+
+        public ClientSession(MapleClient client)
+        {
+            this.Client = client;
+            this.PacketHandler = new MapleClientHandler();
+        }
 
         public void Connect(string ip, int port)
         {
@@ -51,12 +64,10 @@ namespace MSCore.Net
             }
             catch
             {
-                Connected = false;
-                Logger.Error("客戶端無法連上 {0} ", sock.RemoteEndPoint.AddressFamily.ToString());
+                Logger.Error("客戶端無法連上");
                 return;
             }
             Logger.Info("連接至伺服器 {0} 成功", sock.RemoteEndPoint.ToString());
-            Connected = true;
             session = new Session(sock, SessionType.CLIENT_TO_SERVER);
             session.OnInitPacketReceived += new Session.InitPacketReceived(OnInitPacketReceived);
             session.OnPacketReceived += new Session.PacketReceivedHandler(OnPacketReceived);
@@ -68,18 +79,14 @@ namespace MSCore.Net
 
         void OnPacketReceived(byte[] packet)
         {
-            if (!gotEnc || !Connected)
+            if (!isInit || !Connected)
             {
                 return;
             }
             mutex2.WaitOne();
             try
             {
-                short opcode = BitConverter.ToInt16(packet, 0);
-                if (opcode == 0x1B)
-                {
-
-                }
+                PacketHandler.HandlePacket(Client, new PacketReader(packet));
             }
             finally
             {
@@ -89,13 +96,13 @@ namespace MSCore.Net
 
         void OnInitPacketReceived(short version, string patchVer, byte locale)
         {
+            isInit = true;
             Logger.Info("伺服器端版本 {0}.{1} 地區 {2}", version, patchVer, locale);
         }
 
         void OnClientDisconnected(Session session)
         {
             Logger.Info("客戶端從 {0} 斷線", session.Socket.RemoteEndPoint.AddressFamily.ToString());
-            Connected = false;
         }
 
         public void Send(byte[] data)

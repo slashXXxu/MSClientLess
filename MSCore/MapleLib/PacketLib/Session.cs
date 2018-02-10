@@ -173,14 +173,6 @@ namespace MapleLib.PacketLib
                 while (newSize < mCursor + pLength) newSize *= 2;
                 Array.Resize<byte>(ref mBuffer, newSize);
             }
-            if (_type == SessionType.CLIENT_TO_SERVER)
-            {
-                for (int i = 0; i < pLength; i++)
-                {
-                    pBuffer[i] ^= 0x04;
-                    pBuffer[i] = (byte)(((pBuffer[i]) << 4 & (byte)0xF0) | (pBuffer[i] >> 4 & 0x0F));
-                }
-            }
             Buffer.BlockCopy(pBuffer, pStart, mBuffer, mCursor, pLength);
             
             mCursor += pLength;

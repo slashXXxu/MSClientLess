@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MSCore.Handler;
 using static MSCore.Handler.PacketOpcode;
 using MSCore.Client;
+using MSCore.Tools;
 
 namespace MSCore.Net.Handler.SendablePacket
 {
@@ -18,11 +19,13 @@ namespace MSCore.Net.Handler.SendablePacket
 
         public override void WriteBody(MapleClient client)
         {
+            Logger.Info("登入帳號: {0} 登入密碼: {1} Mac: {2}", 
+                client.Account, 
+                client.Passowrd,
+                HexUtil.ByteArrayToString(client.MacAddress));
             packet.WriteMapleString(client.Account);
             packet.WriteMapleString(client.Passowrd);
-
             packet.WriteBytes(client.MacAddress);
-
         }
     }
 }

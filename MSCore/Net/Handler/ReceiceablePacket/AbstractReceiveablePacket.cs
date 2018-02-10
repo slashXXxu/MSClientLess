@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MSCore.Client;
 using MapleLib.PacketLib;
+using MSCore.Handler;
 
 namespace MSCore.Net.Handler.ReceiceablePacket
 {
@@ -13,8 +14,9 @@ namespace MSCore.Net.Handler.ReceiceablePacket
     {
         PacketReader packet;
 
-        AbstractReceiveablePacket(int Opcode)
+        public AbstractReceiveablePacket(PacketOpcode.RecvPacketOpcode Opcode)
         {
+            this.Opcode = (int)Opcode;
         }
 
         public void SetPacket(PacketReader packet)
@@ -22,7 +24,7 @@ namespace MSCore.Net.Handler.ReceiceablePacket
             this.packet = packet;
         }
 
-        public abstract void HandlePacket(MapleClient client);
+        public abstract void HandlePacket(MapleClient client, PacketReader packet);
        
 
         public override byte[] toArray()

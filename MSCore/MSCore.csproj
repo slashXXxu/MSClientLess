@@ -58,10 +58,15 @@
     <Compile Include="MapleLib\PacketWriter.cs" />
     <Compile Include="Net\ClientSession.cs" />
     <Compile Include="Net\Handler\ReceiceablePacket\AbstractReceiveablePacket.cs" />
+    <Compile Include="Net\Handler\ReceiceablePacket\LoginStatus.cs" />
+    <Compile Include="Net\Handler\ReceiceablePacket\Ping.cs" />
+    <Compile Include="Net\Handler\ReceiceablePacket\ServerMessage.cs" />
     <Compile Include="Net\Handler\SendablePacket\AbstractSendablePacket.cs" />
     <Compile Include="Net\Handler\IPacket.cs" />
     <Compile Include="Net\Handler\SendablePacket\LoginPassword.cs" />
+    <Compile Include="Net\Handler\SendablePacket\Pong.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\HexUtil.cs" />
     <Compile Include="Tools\Logger.cs" />
     <Compile Include="Tools\MapleKeys.cs" />
   </ItemGroup>

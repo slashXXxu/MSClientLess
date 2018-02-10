@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using static MSCore.Handler.PacketOpcode;
 using MSCore.Client;
 
-namespace MSCore.Net.Handler.SendPacket
+namespace MSCore.Net.Handler.SendablePacket
 {
-    abstract class AbstractSendablePacket : AbstractPacket
+    public abstract class AbstractSendablePacket : AbstractPacket
     {
         protected PacketWriter packet;
 
